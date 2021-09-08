@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">RSShool2021-Android-task-Storage</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_age">Age</string>
+    <string name="hint_breed">Breed</string>
+    <string name="button_edit">Edit</string>
+    <string name="description_delete_the_item">Delete the item</string>
+    <string name="button_sort_by_name">Name</string>
+    <string name="button_sort_by_age">Age</string>
+    <string name="button_sort_by_Breed">Breed</string>
+    <string name="button_confirm">Confirm</string>
+    <string name="description_add_new_animal">Add new animal</string>
 </resources>
