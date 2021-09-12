@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.fragment.app.FragmentContainerView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:name="com.rovenhook.rsshool2021_android_task_storage.screens.AnimalsListFragment"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    tools:layout="@layout/fragment_animals_list">
+    tools:context=".MainActivity">
 
-</androidx.fragment.app.FragmentContainerView>
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.rovenhook.rsshool2021_android_task_storage.screens.AnimalsListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</FrameLayout>

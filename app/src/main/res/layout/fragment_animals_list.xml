@@ -10,8 +10,13 @@
         android:id="@+id/recyclerViewAnimals"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:itemCount="10"
-        tools:listitem="@layout/animal_item"/>
+        tools:listitem="@layout/animal_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"

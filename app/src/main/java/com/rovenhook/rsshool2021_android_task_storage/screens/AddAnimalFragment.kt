@@ -5,8 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
 import com.rovenhook.rsshool2021_android_task_storage.R
 import com.rovenhook.rsshool2021_android_task_storage.databinding.FragmentAddAnimalBinding
+import com.rovenhook.rsshool2021_android_task_storage.model.entities.Animal
+import com.rovenhook.rsshool2021_android_task_storage.viewmodels.AnimalsViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,10 +41,34 @@ class AddAnimalFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         _binding = FragmentAddAnimalBinding.inflate(inflater, container, false)
+
+        binding.buttonCancel.setOnClickListener {
+            getBackToMainScreen()
+        }
+
+        binding.buttonConfirm.setOnClickListener {
+            val name: String = binding.editTextName.text.toString()
+            val age: String = binding.editTextAge.text.toString()
+            val breed: String = binding.editTextBreed.text.toString()
+
+            if (name.isNotEmpty() && age.isNotEmpty() && breed.isNotEmpty()) {
+                val viewModel: AnimalsViewModel by viewModels()
+                val animal = Animal(name, age.toInt(), breed)
+                viewModel.addAnimal(animal)
+                getBackToMainScreen()
+            } else {
+                Toast.makeText(activity, "All the field must be filled", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         return binding.root
+    }
+    
+    fun getBackToMainScreen() {
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.replace(R.id.fragmentContainerView, AnimalsListFragment())?.commit()
     }
 
     override fun onDestroyView() {

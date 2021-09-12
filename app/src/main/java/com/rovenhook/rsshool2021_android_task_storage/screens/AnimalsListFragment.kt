@@ -5,24 +5,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.rovenhook.rsshool2021_android_task_storage.R
+import com.rovenhook.rsshool2021_android_task_storage.adapters.AnimalsAdapter
 import com.rovenhook.rsshool2021_android_task_storage.databinding.FragmentAnimalsListBinding
+import com.rovenhook.rsshool2021_android_task_storage.model.entities.Animal
+import com.rovenhook.rsshool2021_android_task_storage.viewmodels.AnimalsViewModel
+import com.rovenhook.rsshool2021_android_task_storage.listeners.OnAnimalClickListener
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AnimalsListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AnimalsListFragment : Fragment() {
     private var _binding: FragmentAnimalsListBinding? = null
     private val binding: FragmentAnimalsListBinding get() = _binding!!
+    private val viewModel: AnimalsViewModel by viewModels()
 
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
@@ -37,10 +37,33 @@ class AnimalsListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         _binding = FragmentAnimalsListBinding.inflate(inflater, container, false)
+
+        val adapter = AnimalsAdapter(getOnAnimalClickListener())
+        binding.recyclerViewAnimals.adapter = adapter
+        binding.recyclerViewAnimals.layoutManager = LinearLayoutManager(activity)
+
+        viewModel.getAllAnimals().observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it)
+        })
+
+        binding.floatingActionButton.setOnClickListener {
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.fragmentContainerView, AddAnimalFragment())?.commit()
+        }
+
         return binding.root
+    }
+
+    fun getOnAnimalClickListener() = object : OnAnimalClickListener {
+        override fun onDeleteClicked(animal: Animal) {
+            viewModel.deleteAnimal(animal)
+        }
+
+        override fun onEditClicked(animal: Animal) {
+            TODO("Not yet implemented")
+        }
     }
 
     override fun onDestroyView() {
@@ -49,15 +72,6 @@ class AnimalsListFragment : Fragment() {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AnimalsListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             AnimalsListFragment().apply {

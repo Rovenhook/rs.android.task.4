@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="4dp"
     app:cardCornerRadius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -61,7 +63,7 @@
             android:contentDescription="@string/description_delete_the_item"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@tools:sample/avatars" />
+            app:srcCompat="@drawable/ic_baseline_delete_forever_24" />
 
         <Button
             android:id="@+id/buttonEdit"

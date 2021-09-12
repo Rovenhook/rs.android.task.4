@@ -12,4 +12,5 @@
     <string name="button_sort_by_Breed">Breed</string>
     <string name="button_confirm">Confirm</string>
     <string name="description_add_new_animal">Add new animal</string>
+    <string name="button_cancel">Cancel</string>
 </resources>

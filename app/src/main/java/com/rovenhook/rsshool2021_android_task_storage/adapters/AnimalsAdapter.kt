@@ -3,38 +3,36 @@ package com.rovenhook.rsshool2021_android_task_storage.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ListAdapter
 import com.rovenhook.rsshool2021_android_task_storage.databinding.AnimalItemBinding
-import com.rovenhook.rsshool2021_android_task_storage.model.Animal
+import com.rovenhook.rsshool2021_android_task_storage.model.entities.Animal
+import com.rovenhook.rsshool2021_android_task_storage.listeners.OnAnimalClickListener
 
+class AnimalsAdapter(
+    private val listener: OnAnimalClickListener
+) : ListAdapter<Animal, AnimalsViewHolder>(itemComparator) {
 
-class AnimalsAdapter : RecyclerView.Adapter<AnimalsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimalsViewHolder {
-        val binding = AnimalItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
-        return AnimalsViewHolder(binding)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = AnimalItemBinding.inflate(layoutInflater)
+        return AnimalsViewHolder(listener, binding)
     }
 
     override fun onBindViewHolder(holder: AnimalsViewHolder, position: Int) {
-        TODO("Not yet implemented")
-    }
-
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        holder.bind(getItem(position))
     }
 
     companion object {
         private val itemComparator = object : DiffUtil.ItemCallback<Animal>() {
             override fun areItemsTheSame(oldItem: Animal, newItem: Animal): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Animal, newItem: Animal): Boolean {
                 return oldItem.name == newItem.name &&
                         oldItem.age == newItem.age &&
                         oldItem.breed == newItem.breed
             }
-
-            override fun areContentsTheSame(oldItem: Animal, newItem: Animal): Boolean {
-                TODO("Not yet implemented")
-            }
-
         }
     }
 }
