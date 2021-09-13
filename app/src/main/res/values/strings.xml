@@ -13,4 +13,6 @@
     <string name="button_confirm">Confirm</string>
     <string name="description_add_new_animal">Add new animal</string>
     <string name="button_cancel">Cancel</string>
+    <string name="toolbar_add_animal">Add new animal</string>
+    <string name="toolbar_edit_animal">Edit the animal info</string>
 </resources>

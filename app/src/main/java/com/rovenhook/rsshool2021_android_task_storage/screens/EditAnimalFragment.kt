@@ -9,13 +9,13 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.rovenhook.rsshool2021_android_task_storage.R
 import com.rovenhook.rsshool2021_android_task_storage.databinding.FragmentAddAnimalBinding
+import com.rovenhook.rsshool2021_android_task_storage.databinding.FragmentEditAnimalBinding
 import com.rovenhook.rsshool2021_android_task_storage.model.entities.Animal
 import com.rovenhook.rsshool2021_android_task_storage.viewmodels.AnimalsViewModel
 
-
-class AddAnimalFragment : Fragment() {
-    private var _binding: FragmentAddAnimalBinding? = null
-    private val binding: FragmentAddAnimalBinding get() = _binding!!
+class EditAnimalFragment(private val animal: Animal) : Fragment() {
+    private var _binding: FragmentEditAnimalBinding? = null
+    private val binding: FragmentEditAnimalBinding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +25,11 @@ class AddAnimalFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAddAnimalBinding.inflate(inflater, container, false)
+        _binding = FragmentEditAnimalBinding.inflate(inflater, container, false)
+
+        binding.editTextName.setText(animal.name)
+        binding.editTextAge.setText(animal.age.toString())
+        binding.editTextBreed.setText(animal.breed)
 
         binding.buttonCancel.setOnClickListener {
             getBackToMainScreen()
@@ -38,19 +42,18 @@ class AddAnimalFragment : Fragment() {
 
             if (name.isNotEmpty() && age.isNotEmpty() && breed.isNotEmpty()) {
                 val viewModel: AnimalsViewModel by viewModels()
-                val animal = Animal(name, age.toInt(), breed)
-                viewModel.addAnimal(animal)
+                val updatedAnimal = Animal(name, age.toInt(), breed, animal.id)
+                viewModel.updateAnimal(updatedAnimal)
                 getBackToMainScreen()
             } else {
                 Toast.makeText(activity, "All the fields must be filled", Toast.LENGTH_SHORT).show()
             }
         }
 
-
         return binding.root
     }
 
-    
+
     fun getBackToMainScreen() {
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainerView, AnimalsListFragment()).commit()

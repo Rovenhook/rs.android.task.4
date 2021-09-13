@@ -40,7 +40,16 @@ class RepositorySQLite(application: Application) : AbstractRepository() {
     }
 
     override suspend fun updateAnimal(animal: Animal) {
-        TODO("Not yet implemented")
+        val whereClause: String = "$COLUMN_ID = ?"
+        val whereArgs: Array<String> = arrayOf(animal.id.toString())
+        val newValues = ContentValues()
+            newValues.apply {
+                put(COLUMN_NAME, animal.name)
+                put(COLUMN_AGE, animal.age)
+                put(COLUMN_BREED, animal.breed)
+        }
+        sqLiteDatabase.update(ANIMALS_TABLE_NAME, newValues, whereClause, whereArgs)
+        updateLiveData()
     }
 
     override suspend fun deleteAnimal(animal: Animal) {

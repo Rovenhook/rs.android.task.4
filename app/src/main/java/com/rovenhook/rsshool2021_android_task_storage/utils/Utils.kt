@@ -1,7 +1,7 @@
 package com.rovenhook.rsshool2021_android_task_storage.utils
 
 const val ANIMALS_DATABASE_NAME = "animals_database.db"
-const val ANIMALS_DATABASE_VERSION = 1
+const val ANIMALS_DATABASE_VERSION = 2
 const val ANIMALS_TABLE_NAME = "animals_table"
 const val COLUMN_NAME = "name"
 const val COLUMN_AGE = "age"

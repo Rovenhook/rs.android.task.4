@@ -7,7 +7,7 @@ import com.rovenhook.rsshool2021_android_task_storage.utils.QUERY_SELECT_ALL_ANI
 
 @Dao
 interface AnimalDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(animal: Animal)
 
     @Delete

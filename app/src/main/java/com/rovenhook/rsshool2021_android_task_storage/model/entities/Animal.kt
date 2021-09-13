@@ -9,13 +9,13 @@ import com.rovenhook.rsshool2021_android_task_storage.utils.*
 data class Animal(
 
     @ColumnInfo(name = COLUMN_NAME)
-    val name: String,
+    val name: String?,
 
     @ColumnInfo(name = COLUMN_AGE)
-    val age: Int,
+    val age: Int?,
 
     @ColumnInfo(name = COLUMN_BREED)
-    val breed: String,
+    val breed: String?,
 
     @ColumnInfo(name = COLUMN_ID)
     @PrimaryKey(autoGenerate = true)

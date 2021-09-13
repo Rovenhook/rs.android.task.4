@@ -12,7 +12,7 @@ import com.rovenhook.rsshool2021_android_task_storage.utils.SWITCHED_TO_ROOM
 import kotlinx.coroutines.launch
 
 class AnimalsViewModel(application: Application) : AndroidViewModel(application) {
-    private var repository: AbstractRepository = RepositorySQLite(application)
+    private var repository: AbstractRepository = RepositoryRoom(getApplication())//RepositorySQLite(getApplication())
     private var repositoryMode: Int = SWITCHED_TO_ROOM
 
     fun changeRepositoryType(switchTo: Int) {
